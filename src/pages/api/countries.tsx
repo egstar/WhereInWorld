@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             let countries = await Country.getAll()
             if(countries)
             res.status(200)
-            .json(JSON.stringify(countries))
+            .send(JSON.parse(countries))
         } catch(e) {
             res.status(401).json({error: 'Not Authorized'})
         }
@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(401).json({error: 'Not Authorized'})
         }
     }
-    res.status(401).json({
+    res.status(403).json({
         Done:false,
         Host: req.headers.host,
         origin: req.headers.origin || 'EMPTY',
