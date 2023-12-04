@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             let countries = await Country.getAll()
             if(countries)
             res.status(200)
-            .send(countries)
+            .json({countries})
         } catch(e) {
             res.status(401).json('Not Authorized')
         }
