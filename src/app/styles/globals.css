@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+
+:root {
+    --txt: 200, 15%, 8% ;
+    --bg: 0, 20%, 90% ;
+    --elm: 0, 0%, 100% ;
+    --input: 0, 0%, 52% ;
+    font-family: 'Nunito Sans', sans-serif;
+
+}
+
+* {
+    font-family: 'Nunito Sans', sans-serif;
+}
+*[data-theme='dark'] {
+    --elm: 209,23%,22% ;
+    --bg: 207, 26%, 22% ;
+    --txt: 0,0%,100% ; 
+    --input: 207, 26%, 22% ;
+}
