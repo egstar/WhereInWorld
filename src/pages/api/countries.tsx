@@ -4,7 +4,7 @@ import CountryModel from '@/models/countries'
 
 const Country = new CountryModel()
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
-    if(req.method === 'GET' && req.headers.host == env.SITE_URL ){
+    if(req.method === 'GET' ){
         try {
             let countries = await Country.getAll()
             if(countries)
@@ -14,21 +14,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(401).json({error: 'Not Authorized'})
         }
     }
-    if(req.method === 'POST' && req.body.country && req.headers.host == env.SITE_URL ) {
+    if(req.method === 'POST' && req.body.country ) {
         try {
             let country = await Country.getCountry(req.body.country!)
             if(country){
-                res.status(200).json(country)
+                res.status(200).json(JSON.parse(country))
             }
         } catch(e) {
             res.status(401).json({error: 'Not Authorized'})
         }
     }
-    if(req.method === 'OPTIONS' && req.body.borders && req.headers.host == env.SITE_URL ) {
+    if(req.method === 'OPTIONS' && req.body.borders ) {
         let {borders} = req.body
         let bordersNames = await Country.getBorders(borders)
         try{
-            res.status(200).json(bordersNames)
+            res.status(200).json(JSON.parse(bordersNames))
         } catch(e) {
             res.status(401).json({error: 'Not Authorized'})
         }
@@ -36,8 +36,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(401).json({
         Done:false,
         Host: req.headers.host,
-        origin: req.headers.origin,
-        env: env.SITE_URL,
-        ref: req.headers.referer
+        origin: req.headers.origin || 'EMPTY',
+        env: env.SITE_URL || 'EMPTY',
+        ref: req.headers.referer || 'EMPTY',
+
     })
 }
