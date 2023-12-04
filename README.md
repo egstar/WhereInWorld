@@ -51,7 +51,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Github](https://github.com/egstar/WhereInWorld)
-- Live Site URL: [Vercel](https://where-in-world.vercel.app)
+- Live Site URL: [Vercel](https://where-in-world-six.vercel.app)
 
 ## My process
 
