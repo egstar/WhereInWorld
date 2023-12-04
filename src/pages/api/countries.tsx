@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(401).json('Not Authorized')
         }
     }
-    res.status(401).json({
+    res.status(203).json({
         Done:false,
         Host: req.headers.host,
         origin: req.headers.origin || 'EMPTY',
