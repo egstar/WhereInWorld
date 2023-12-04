@@ -7,33 +7,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if(req.method === 'GET'){
         try {
             let countries = await Country.getAll()
-            if(!countries) res.json(JSON.parse('Failed'))
+            if(countries)
             res.status(200)
             .json(JSON.stringify(countries))
         } catch(e) {
-            res.status(401).json(JSON.stringify('Not Authorized'))
+            res.status(401).json({error: 'Not Authorized'})
         }
     }
-    if(req.method === 'POST' && req.body.country && req.headers.host == env.SITE_URL ) {
+    if(req.method === 'POST' && req.body.country) {
         try {
             let country = await Country.getCountry(req.body.country!)
             if(country){
                 res.status(200).json(JSON.parse(country))
             }
         } catch(e) {
-            res.status(401).json('Not Authorized')
+            res.status(401).json({error: 'Not Authorized'})
         }
     }
-    if(req.method === 'OPTIONS' && req.body.borders && req.headers.host == env.SITE_URL ) {
+    if(req.method === 'OPTIONS' && req.body.borders) {
         let {borders} = req.body
         let bordersNames = await Country.getBorders(borders)
         try{
             res.status(200).json(JSON.parse(bordersNames))
         } catch(e) {
-            res.status(401).json('Not Authorized')
+            res.status(401).json({error: 'Not Authorized'})
         }
     }
-    res.status(203).json({
+    res.status(401).json({
         Done:false,
         Host: req.headers.host,
         origin: req.headers.origin || 'EMPTY',
