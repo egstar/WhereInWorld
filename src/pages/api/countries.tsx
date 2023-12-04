@@ -4,12 +4,12 @@ import CountryModel from '@/models/countries'
 
 const Country = new CountryModel()
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
-    if(req.method === 'GET' && req.headers.host == env.SITE_URL ){
+    if(req.method === 'GET'){
         try {
             let countries = await Country.getAll()
             if(countries)
             res.status(200)
-            .json({countries})
+            .json({countries: countries})
         } catch(e) {
             res.status(401).json('Not Authorized')
         }
