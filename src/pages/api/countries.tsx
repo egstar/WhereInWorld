@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(200)
             .json(countries)
         } catch(e) {
-            res.status(401).json({error: 'Not Authorized'})
+            res.status(401).json('Not Authorized')
         }
     }
     if(req.method === 'POST' && req.body.country && req.headers.host == env.SITE_URL ) {
@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 res.status(200).json(JSON.parse(country))
             }
         } catch(e) {
-            res.status(401).json({error: 'Not Authorized'})
+            res.status(401).json('Not Authorized')
         }
     }
     if(req.method === 'OPTIONS' && req.body.borders && req.headers.host == env.SITE_URL ) {
@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try{
             res.status(200).json(JSON.parse(bordersNames))
         } catch(e) {
-            res.status(401).json({error: 'Not Authorized'})
+            res.status(401).json('Not Authorized')
         }
     }
     res.status(401).json({
