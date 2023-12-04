@@ -4,11 +4,12 @@ import CountryModel from '@/models/countries'
 
 const Country = new CountryModel()
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
-    if(req.method === 'GETZ'){
+    if(req.method === 'GET'){
         try {
             let countries = await Country.getAll()
             if(countries){
-                res.status(200).json({
+                res.status(200)
+                .json({
                     data: countries
                 })
             } else {
