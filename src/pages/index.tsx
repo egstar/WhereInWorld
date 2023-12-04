@@ -10,7 +10,7 @@ export default function Home(){
         fetch('/api/countries', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
             credentials: 'include',
         }).then((res) => {

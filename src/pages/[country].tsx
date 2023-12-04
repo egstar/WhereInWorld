@@ -11,7 +11,7 @@ const CountryPage = () => {
         fetch('/api/countries', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
             credentials: 'include',
             body: JSON.stringify({
@@ -29,7 +29,7 @@ const CountryPage = () => {
         fetch('/api/countries', {
             method: 'OPTIONS',
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 borders: country[0].borders
