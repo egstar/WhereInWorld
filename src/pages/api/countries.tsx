@@ -8,17 +8,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             let countries = await Country.getAll()
             if(countries){
-                res.status(200)
-                .json({
-                    data: {...countries}
-                })
+                return res.status(200)
+                .json(countries)
             } else {
-                res.status(300).json({
+                return res.status(300).json({
                     error: 'No data'
                 })
             }
         } catch(e) {
-            res.status(401).json({
+            return res.status(401).json({
                 error: 'Not Authorized'
             })
         }
@@ -27,12 +25,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             let country = await Country.getCountry(req.body.country!)
             if(country){
-                res.status(200).json({
-                    data: country
-                })
+                return res.status(200).json(country)
             }
         } catch(e) {
-            res.status(401).json({
+            return res.status(401).json({
                 error: 'Not Authorized'
             })
         }
@@ -41,11 +37,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         let {borders} = req.body
         let bordersNames = await Country.getBorders(borders)
         try{
-            res.status(200).json({
-                data: bordersNames
-            })
+            return res.status(200).json(bordersNames)
         } catch(e) {
-            res.status(401).json({
+            return res.status(401).json({
                 error: 'Not Authorized'
             })
         }
