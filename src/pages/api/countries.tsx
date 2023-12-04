@@ -4,12 +4,13 @@ import CountryModel from '@/models/countries'
 
 const Country = new CountryModel()
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
-    if(req.method === 'GETZ'){
+    if(req.method === 'GET'){
         try {
             let countries = await Country.getAll()
+            console.error(countries[0])
             if(countries)
             res.status(200)
-            .send(JSON.parse(countries))
+            .json({data: countries})
         } catch(e) {
             res.status(401).json({error: 'Not Authorized'})
         }
@@ -18,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         try {
             let country = await Country.getCountry(req.body.country!)
             if(country){
-                res.status(200).json(JSON.parse(country))
+                res.status(200).json({data: country})
             }
         } catch(e) {
             res.status(401).json({error: 'Not Authorized'})
@@ -28,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         let {borders} = req.body
         let bordersNames = await Country.getBorders(borders)
         try{
-            res.status(200).json(JSON.parse(bordersNames))
+            res.status(200).json({data: bordersNames})
         } catch(e) {
             res.status(401).json({error: 'Not Authorized'})
         }
