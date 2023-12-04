@@ -7,11 +7,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if(req.method === 'GET'){
         try {
             let countries = await Country.getAll()
-            if(!countries) res.json('Failed')
+            if(!countries) res.json(JSON.parse('Failed'))
             res.status(200)
-            .json({countries: countries})
+            .json(JSON.stringify(countries))
         } catch(e) {
-            res.status(401).json('Not Authorized')
+            res.status(401).json(JSON.stringify('Not Authorized'))
         }
     }
     if(req.method === 'POST' && req.body.country && req.headers.host == env.SITE_URL ) {
