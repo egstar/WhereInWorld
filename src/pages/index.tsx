@@ -9,10 +9,9 @@ export default function Home(){
     useEffect(() => {
         fetch('/api/countries', {
             method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: 'include',
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // },
         }).then((res) => {
             if(res.status != 200) return console.log('Error', res.json())
             return res.json()
