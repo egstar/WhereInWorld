@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             if(countries){
                 res.status(200)
                 .json({
-                    data: countries
+                    data: {...countries}
                 })
             } else {
                 res.status(300).json({
@@ -50,12 +50,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             })
         }
     }
-    res.status(302).json({
-        Done:false,
-        Host: req.headers.host,
-        origin: req.headers.origin || 'EMPTY',
-        env: env.SITE_URL || 'EMPTY',
-        ref: req.headers.referer || 'EMPTY',
 
-    })
 }
