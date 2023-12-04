@@ -4,7 +4,7 @@ import CountryModel from '@/models/countries'
 
 const Country = new CountryModel()
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
-    if(req.method === 'GET' && req.headers.host == env.HOST+':'+env.PORT ){
+    if(req.method === 'GET' && req.headers.origin == env.SITE_URL ){
         try {
             let countries = await Country.getAll()
             if(countries)
