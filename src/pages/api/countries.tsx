@@ -4,8 +4,7 @@ import CountryModel from '@/models/countries'
 
 const Country = new CountryModel()
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
-    if(req.method === 'GET' && req.headers.origin == env.SITE_URL ){
-        console.log(env.SITE_URL, req.headers.origin)
+    if(req.method === 'GET' && req.headers.host == env.SITE_URL ){
         try {
             let countries = await Country.getAll()
             if(countries)
@@ -15,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(401).json({error: 'Not Authorized'})
         }
     }
-    if(req.method === 'POST' && req.body.country) {
+    if(req.method === 'POST' && req.body.country && req.headers.host == env.SITE_URL ) {
         try {
             let country = await Country.getCountry(req.body.country!)
             if(country){
@@ -25,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(401).json({error: 'Not Authorized'})
         }
     }
-    if(req.method === 'OPTIONS' && req.body.borders) {
+    if(req.method === 'OPTIONS' && req.body.borders && req.headers.host == env.SITE_URL ) {
         let {borders} = req.body
         let bordersNames = await Country.getBorders(borders)
         try{
